@@ -2,7 +2,8 @@ FROM alpine:latest
 
 RUN \
 	apk --no-cache update && \
-	apk --no-cache upgrade
+	apk --no-cache upgrade && \
+	apk --no-cache add sudo
 
 RUN \
 	addgroup -g 82 -S www-data && \
@@ -41,4 +42,4 @@ EXPOSE 80 443 2019
 STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
-CMD ["caddy", "run"]
+CMD ["sudo", "-u", "www", "caddy", "run"]
