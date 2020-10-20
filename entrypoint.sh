@@ -9,4 +9,4 @@ for f in /scripts/entrypoint.d/*sh; do
 	[ -e "$f" ] && "$f"
 done
 
-exec "su www -c $@"
+exec "$@"
