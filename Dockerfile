@@ -3,6 +3,7 @@ FROM alpine:latest
 RUN \
 	apk --no-cache update && \
 	apk --no-cache upgrade && \
+	apk --no-cache add sudo && \
 	apk --no-cache add libcap
 
 RUN \
@@ -47,4 +48,4 @@ EXPOSE 80 443 2019
 STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
-CMD ["su", "www", "-c", "caddy", "run", "-config", "/etc/caddy/Caddyfile"]
+CMD ["sudo", "-u", "www", "-g", "www-data", "caddy", "run", "--config", "/etc/caddy/Caddyfile"]
