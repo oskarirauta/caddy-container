@@ -48,4 +48,5 @@ EXPOSE 80 443 2019
 STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
-CMD ["sudo", "-u", "www", "caddy", "run"]
+#CMD ["sudo", "-u", "www", "caddy", "run"]
+CMD ["caddy", "run"]
