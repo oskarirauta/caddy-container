@@ -43,4 +43,4 @@ STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
 
-CMD ["caddy.sh", "run", "--config", "/etc/caddy/Caddyfile"]
+CMD ["sudo", "-u www", "-g www-data", "caddy", "run", "--config", "/etc/caddy/Caddyfile"]
