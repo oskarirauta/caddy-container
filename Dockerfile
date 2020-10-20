@@ -10,7 +10,7 @@ RUN \
 	rm -f /var/cache/apk/* && \
 	apk --no-cache update && \
 	apk --no-cache add caddy tzdata curl ca-certificates
-	echo "http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/main" >> /etc/apk/repositories && \
+	echo "http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/main" > /etc/apk/repositories && \
 	echo "http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/community" >> /etc/apk/repositories && \
 	rm -f /var/cache/apk/* && \
 	apk --no-cache update
