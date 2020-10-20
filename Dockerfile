@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN \
 	apk --no-cache update && \
 	apk --no-cache upgrade && \
-	apd --no-cache add sudo
+	apk--no-cache add sudo
 
 RUN \
 	addgroup -g 82 -S www-data && \
