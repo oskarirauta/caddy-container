@@ -15,6 +15,7 @@ RUN \
 	echo "http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/community" >> /etc/apk/repositories
 
 RUN \
+	addgroup -g 82 -S www-data && \
 	adduser -u 82 -D -S -G www-data -g www www && \
 	mkdir -p /var/www /run/caddy /etc/caddy/ssl && \
 	chown -R www:www-data /var/www && \
