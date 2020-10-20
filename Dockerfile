@@ -33,7 +33,7 @@ COPY entrypoint.sh /scripts/entrypoint.sh
 VOLUME ["/var/www"]
 VOLUME ["/scripts/entrypoint.d"]
 
-EXPOSE 80 443
+EXPOSE 80 443 2019
 
 STOPSIGNAL SIGTERM
 
