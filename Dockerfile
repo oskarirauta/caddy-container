@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN \
 	apk --no-cache update && \
 	apk --no-cache upgrade && \
-	apk --no-cache add sudo
+	apk --no-cache add sudo libcap
 
 RUN \
 	addgroup -g 82 -S www-data && \
@@ -29,6 +29,7 @@ RUN \
 	mkdir -p /scripts /scripts/entrypoint.d
 
 RUN \
+	setcap cap_net_bind_service=+ep /usr/sbin/caddy && \
 	rm -f /etc/periodic/monthly/geoip && \
 	rm -f /var/cache/apk/*
 
