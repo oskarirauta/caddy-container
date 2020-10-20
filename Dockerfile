@@ -37,4 +37,4 @@ EXPOSE 80 443
 STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
-CMD ["caddy", "-conf", "/etc/caddy/caddy.conf", "-disable-http-challenge", "-disable-tls-alpn-challenge", "-pidfile", "/run/caddy"]
+CMD ["caddy", "run"]
