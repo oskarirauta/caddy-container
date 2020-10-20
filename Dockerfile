@@ -32,6 +32,7 @@ RUN \
 	rm -f /etc/periodic/monthly/geoip && \
 	rm -f /var/cache/apk/*
 
+COPY caddy.sh /usr/sbin/caddy.sh
 COPY entrypoint.sh /scripts/entrypoint.sh
 
 VOLUME ["/var/htdocs"]
@@ -43,4 +44,4 @@ STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
 
-CMD ["sudo", "-u", "www", "-g", "www-data", "caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+CMD ["caddy.sh", "run", "--config", "/etc/caddy/Caddyfile"]
