@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN \
 	apk --no-cache update && \
 	apk --no-cache upgrade && \
-	apk --no-cache add sudo
+	apk --no-cache add sudo libcap
 
 RUN \
 	addgroup -g 82 -S www-data && \
@@ -19,6 +19,9 @@ RUN \
 	echo "http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/community" >> /etc/apk/repositories && \
 	rm -f /var/cache/apk/* && \
 	apk --no-cache update
+
+RUN \
+	setcap cap_net_bind_service=+ep /usr/sbin/caddy
 
 RUN \
 	mkdir -p /var/www /run/caddy /etc/caddy/ssl && \
