@@ -2,7 +2,8 @@ FROM alpine:latest
 
 RUN \
 	apk --no-cache update && \
-	apk --no-cache upgrade
+	apk --no-cache upgrade && \
+	apd --no-cache add sudo
 
 RUN \
 	addgroup -g 82 -S www-data && \
@@ -42,5 +43,4 @@ STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
 
-USER www:www-data
-CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+CMD ["caddy.sh", "run", "--config", "/etc/caddy/Caddyfile"]
