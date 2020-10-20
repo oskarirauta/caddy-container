@@ -5,6 +5,10 @@ RUN \
 	apk --no-cache upgrade
 
 RUN \
+	addgroup -g 82 -S www-data && \
+	adduser -u 82 -D -S -G www-data -g www www
+
+RUN \
 	echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories && \
 	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
 	rm -f /var/cache/apk/* && \
@@ -15,10 +19,7 @@ RUN \
 	rm -f /var/cache/apk/* && \
 	apk --no-cache update
 
-# addgroup -g 82 -S www-data && \
-
 RUN \
-	adduser -u 82 -D -S -G www-data -g www www && \
 	mkdir -p /var/www /run/caddy /etc/caddy/ssl && \
 	chown -R www:www-data /var/www && \
 	chown -R www:www-data /run/caddy
