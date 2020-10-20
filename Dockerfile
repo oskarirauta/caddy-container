@@ -21,15 +21,15 @@ RUN \
 	rm -f /var/cache/apk/* && \
 	apk --no-cache update
 
-#RUN \
-#	setcap cap_net_bind_service=+ep /usr/sbin/caddy
-
 RUN \
 	mkdir -p /var/www /run/caddy /etc/caddy/ssl && \
 	chown -R www:www-data /var/www && \
-	chown -R www:www-data /run/caddy && \
+	chown -R www:www-data /run/caddy
+
+RUN \
 	chown -R www:www-data /etc/caddy
-	
+#setcap cap_net_bind_service=+ep /usr/sbin/caddy
+
 RUN \
 	mkdir -p /scripts /scripts/entrypoint.d
 
