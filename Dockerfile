@@ -3,8 +3,8 @@ FROM alpine:latest
 RUN \
 	apk --no-cache update && \
 	apk --no-cache upgrade && \
-	apk --no-cache add sudo
-#apk --no-cache add libcap
+	apk --no-cache add sudo && \
+	apk --no-cache add libcap
 
 RUN \
 	addgroup -g 82 -S www-data && \
@@ -27,8 +27,8 @@ RUN \
 	chown -R www:www-data /run/caddy
 
 RUN \
-	chown -R www:www-data /etc/caddy
-#setcap cap_net_bind_service=+ep /usr/sbin/caddy
+	chown -R www:www-data /etc/caddy && \
+	setcap cap_net_bind_service=+ep /usr/sbin/caddy
 
 RUN \
 	mkdir -p /scripts /scripts/entrypoint.d
