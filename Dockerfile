@@ -28,7 +28,8 @@ RUN \
 
 RUN \
 	chown -R www:www-data /etc/caddy && \
-	setcap cap_net_bind_service=+ep /usr/sbin/caddy
+	setcap cap_net_bind_service=+ep /usr/sbin/caddy && \
+	apk del libcap
 
 RUN \
 	mkdir -p /scripts /scripts/entrypoint.d
