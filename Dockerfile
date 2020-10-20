@@ -1,13 +1,19 @@
 FROM alpine:latest
 
 RUN \
-	echo "http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/community" >> /etc/apk/repositories
+	apk --no-cache update && \
+	apk --no-cache upgrade
 
 RUN \
-	apk --no-cache update && \
-	apk --no-cache upgrade && \
+	echo echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+
+RUN \
 	apk --no-cache add caddy tzdata curl ca-certificates
-  
+
+RUN \
+	echo "http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/main" >> /etc/apk/repositories && \
+	echo "http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d'.' -f1,2)/community" >> /etc/apk/repositories
+
 RUN \
 	adduser -u 82 -D -S -G www-data -g www www && \
 	mkdir -p /var/www /run/caddy /etc/caddy/ssl && \
