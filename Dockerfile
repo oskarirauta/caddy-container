@@ -6,7 +6,7 @@ RUN \
 
 RUN \
 	addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -s /bin/ash -G www-data -g www www
+	adduser -u 82 -D -s /bin/ash -h /var/htdocs -G www-data -g www www
 
 RUN \
 	echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories && \
@@ -20,8 +20,8 @@ RUN \
 	apk --no-cache update
 
 RUN \
-	mkdir -p /var/www /run/caddy /etc/caddy/ssl && \
-	chown -R www:www-data /var/www /run/caddy /etc/caddy
+	mkdir -p /var/htdocs /run/caddy /etc/caddy/ssl && \
+	chown -R www:www-data /var/htdocs /run/caddy /etc/caddy
 
 RUN \
 	mkdir -p /scripts /scripts/entrypoint.d
@@ -32,7 +32,7 @@ RUN \
 
 COPY entrypoint.sh /scripts/entrypoint.sh
 
-VOLUME ["/var/www"]
+VOLUME ["/var/htdocs"]
 VOLUME ["/scripts/entrypoint.d"]
 
 EXPOSE 80 443 2019
