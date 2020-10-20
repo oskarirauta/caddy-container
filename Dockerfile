@@ -2,12 +2,11 @@ FROM alpine:latest
 
 RUN \
 	apk --no-cache update && \
-	apk --no-cache upgrade && \
-	apk --no-cache add sudo
+	apk --no-cache upgrade
 
 RUN \
 	addgroup -g 82 -S www-data && \
-	adduser -u 82 -D -S -G www-data -g www www
+	adduser -u 82 -D -s /bin/ash -G www-data -g www www
 
 RUN \
 	echo "http://dl-cdn.alpinelinux.org/alpine/edge/main" > /etc/apk/repositories && \
@@ -41,4 +40,4 @@ EXPOSE 80 443 2019
 STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/scripts/entrypoint.sh"]
-CMD ["sudo", "-u", "www", "-g", "www-data", "caddy", "run", "--config", "/etc/caddy/Caddyfile"]
+CMD ["su", "www", "-c", "caddy", "run", "--config", "/etc/caddy/Caddyfile"]
