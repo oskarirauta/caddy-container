@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN \
 	apk --no-cache update && \
 	apk --no-cache upgrade && \
-  apk --no-cache add caddy tzdata curl ca-certificates
+	apk --no-cache add caddy tzdata curl ca-certificates
   
 RUN \
 	adduser -u 82 -D -S -G www-data -g www www && \
@@ -17,6 +17,8 @@ RUN \
 RUN \
 	rm -f /etc/periodic/monthly/geoip && \
 	rm -f /var/cache/apk/*
+
+COPY entrypoint.sh /scripts/entrypoint.sh
 
 VOLUME ["/var/www"]
 VOLUME ["/scripts/entrypoint.d"]
