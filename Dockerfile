@@ -3,7 +3,7 @@ FROM alpine:latest
 RUN \
 	apk --no-cache update && \
 	apk --no-cache upgrade && \
-	apk --no-cache add sudo
+	apk --no-cache --update add sudo busybox-suid
 
 RUN \
 	addgroup -g 82 -S www-data && \
