@@ -42,6 +42,8 @@ EXPOSE 80 443 2019
 
 STOPSIGNAL SIGTERM
 
+HEALTHCHECK --interval=55s --timeout=10s --start-period=120s CMD curl -s http://127.0.0.1:2019/
+
 ENTRYPOINT ["/scripts/entrypoint.sh"]
 
 CMD ["caddy.sh", "run", "--config", "/etc/caddy/Caddyfile"]
